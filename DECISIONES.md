@@ -133,6 +133,8 @@ Decisiones tomadas durante el desarrollo de **Daily Whip**, en orden cronológic
 | D62 | **Icono definitivo:** el látigo dando el chasquido sobre el rojo `#EE0000`, a 32×32 en arte ASCII (`scripts/icons.mjs`). Escala exacto a 32 (pestaña del navegador), 192 y 512 (app instalada). | Técnica |
 | D63 | El service worker **ignora `Vary`** al buscar en su caché. Con un servidor que responda `Vary: Origin`, la app se quedaba sin JavaScript ni estilos sin conexión. En GitHub Pages no fallaba (comprobado), pero así no depende del servidor. | Técnica |
 | D64 | **README final** de instalación y uso, con una captura, y **REVISION.md** con los criterios de aceptación del brief para la revisión en Windows. La etiqueta `v1.0.0` se pone cuando esa revisión salga bien. | Técnica |
+| D65 | El usuario revisa [REVISION.md](REVISION.md): **todo correcto**. | Usuario |
+| D66 | Se publica la **versión 1.0.0**: etiqueta `v1.0.0` y una **Release en GitHub** con las notas de la versión. No lleva instalador, porque la app se distribuye por la URL (D38). | Usuario |
 
 ---
 
