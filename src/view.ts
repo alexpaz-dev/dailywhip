@@ -4,6 +4,7 @@
 
 import { formatClock, formatDate } from './format';
 import type { Snapshot, Status } from './timer';
+import { spriteUrl } from './whip';
 
 const BLOCKS = 20;
 
@@ -24,6 +25,8 @@ export function createView(app: HTMLElement) {
     blink: el<HTMLButtonElement>('blink'),
   };
   const blocks = Array.from({ length: BLOCKS }, () => progress.appendChild(document.createElement('span')));
+  // Shown and animated by CSS according to the phase.
+  el('whip').style.backgroundImage = spriteUrl();
 
   function render(s: Snapshot, today: Date) {
     app.dataset.phase = s.phase;

@@ -45,10 +45,19 @@ try {
   await pip.setViewportSize({ width: 300, height: 250 }); // the size openPip() requests
   await main.screenshot({ path: `${OUT}/main-floating.png` });
 
-  const shot = (name) => pip.screenshot({ path: `${OUT}/pip-${name}.png` });
-  // CSS animations ignore the fake clock: pause the blink at a chosen moment.
-  const blinkAt = (ms) =>
-    pip.evaluate((t) => document.getAnimations().forEach((a) => ((a.currentTime = t), a.pause())), ms);
+  const shot = async (name) => {
+    await sleep(100); // a frozen animation frame can take a moment to paint
+    await pip.screenshot({ path: `${OUT}/pip-${name}.png` });
+  };
+  // CSS animations ignore the fake clock: pause each one at a chosen time (ms).
+  // whip-lash starts after the 400 ms entrance; its frames are in styles.css.
+  const freeze = (times) =>
+    pip.evaluate((t) => {
+      for (const a of document.getAnimations()) {
+        if (a.animationName in t) a.currentTime = t[a.animationName];
+        a.pause();
+      }
+    }, times);
   const blinkIs = (value) =>
     waitFor(async () => (await pip.locator('#app').getAttribute('data-blink')) === value, `blink ${value}`);
 
@@ -59,29 +68,41 @@ try {
   await shot('2-normal');
   await context.clock.fastForward('05:00'); // 12:00 of 15:00: WARNING
   await waitForText(pip, '#clock', '03:00');
-  await blinkAt(250);
-  await shot('3a-warning');
-  await blinkAt(750);
-  await shot('3b-warning-dark');
+  await freeze({ 'whip-in': 300 }); // third of four jumps
+  await shot('3a-warning-whip-entering');
+  await freeze({ blink: 250, 'whip-in': 400, 'whip-lash': 400 });
+  await shot('3b-warning-whip-rest');
+  await freeze({ blink: 750, 'whip-lash': 3100 });
+  await shot('3c-warning-dark-whip-crack');
   // Clicks leave the mouse hovering the bolt; move it away to see its state.
   await pip.click('#blink');
   await blinkIs('off');
   await pip.mouse.move(0, 0);
-  await shot('3c-warning-no-blink');
+  await freeze({ 'whip-lash': 2950 });
+  await shot('3d-warning-no-blink-whip-swing');
   await pip.click('#blink');
   await blinkIs('on');
   await pip.mouse.move(0, 0);
   await context.clock.fastForward('05:35'); // 17:35: TIME'S UP
   await waitForText(pip, '#overtime', '+02:35');
-  await blinkAt(750);
-  await shot('4-timesup-dark');
+  await freeze({ blink: 750, 'whip-frenzy': 350, 'whip-shake': 0 });
+  await shot('4-timesup-dark-whip-crack');
 
   // Windows "Animation effects" off: no blinking until the user turns it on.
   const reduced = await browser.newContext({ reducedMotion: 'reduce' });
+  await reduced.clock.install(); // freezes the render loop so the phase set below sticks
   const page = await reduced.newPage();
   await page.goto(server.resolvedUrls.local[0]);
   if ((await page.locator('#app').getAttribute('data-blink')) !== 'off') {
     errors.push('Blinking should start off when the system reduces motion');
+  }
+  const whip = await page.evaluate(() => {
+    document.getElementById('app').dataset.phase = 'warning';
+    const style = getComputedStyle(document.getElementById('whip'));
+    return { display: style.display, animation: style.animationName };
+  });
+  if (whip.display !== 'block' || whip.animation !== 'none') {
+    errors.push(`With reduced motion the whip should show still, got ${JSON.stringify(whip)}`);
   }
   await reduced.close();
 } finally {

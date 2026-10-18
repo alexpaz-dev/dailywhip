@@ -115,6 +115,17 @@ Decisiones tomadas durante el desarrollo de **Daily Whip**, en orden cronológic
 | D54 | Lo apagado sobre rojo pasa de `#990000` a **`#660000`**, para que se siga viendo en las dos fases del parpadeo (actualiza D49). Los botones pasan a ser transparentes y parpadean con la ventana. | Técnica |
 | D55 | El **rojo de alerta pasa a `#EE0000`** (actualiza D03). Con texto blanco da un contraste de 4,5:1, el mínimo para el texto de 8 px. El brief permite tonos intermedios de rojo cuando mejoran la legibilidad. | Usuario |
 
+## 11. F6 · El látigo · 2026-10-18
+
+| #   | Decisión | Origen |
+| :-- | :------- | :----- |
+| D56 | El sprite mide **48×32 píxeles** (actualiza D17, que preveía 32×32) y se dibuja a ×2 en la **esquina inferior izquierda**. Es el hueco libre de la ventana (106×60 px, bajo el -5 y a la izquierda de RESET), y con ese ancho la tralla tiene recorrido. | Técnica |
+| D57 | Tiene **cinco fotogramas**: reposo, preparación, golpe, chasquido (con destello) y retroceso. Es blanco con contorno negro y mango gris, así que se ve sobre el rojo y sobre el rojo oscuro. Los fotogramas están en `whip.ts` como arte ASCII, un carácter por píxel, y se pueden editar a mano. | Técnica |
+| D58 | Los fotogramas se convierten en un **sprite SVG incrustado**, y la animación es **solo CSS**: sin JavaScript por fotograma ni peticiones de red, también en la ventana flotante y sin conexión. | Técnica |
+| D59 | **WARNING:** sube desde el borde inferior con la tralla en alto, en 4 saltos pixelados, y después da un latigazo cada 3 s. **TIME'S UP:** latigazos sin pausa y temblor. Nunca recibe clics. | Técnica |
+| D60 | Con los **efectos de animación de Windows desactivados**, el látigo aparece pero quieto; en TIME'S UP, en el fotograma del chasquido. El interruptor del rayo solo controla el parpadeo. | Técnica |
+| D61 | Un test obliga a que el arte deje libres las 4 filas superiores y la última columna. Así el látigo no alcanza los botones ni cuando tiembla. | Técnica |
+
 ---
 
 ## Pendientes
