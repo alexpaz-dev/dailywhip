@@ -18,8 +18,13 @@
             <h1 class="title">DAILY WHIP</h1>
             <p id="date"></p>
           </header>
-          <p id="clock" class="clock" role="timer">15:00</p>
-          <p id="timesup" class="timesup" hidden></p>
+          <div class="display">
+            <p id="clock" class="clock" role="timer">15:00</p>
+            <div id="timesup" class="timesup" hidden>
+              <p class="timesup-title">TIME'S UP!</p>
+              <p id="overtime" class="overtime">+00:00</p>
+            </div>
+          </div>
           <div
             id="progress"
             class="progress"

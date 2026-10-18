@@ -14,6 +14,7 @@ export function createView(app: HTMLElement) {
   const date = el('date');
   const clock = el('clock');
   const timesUp = el('timesup');
+  const overtime = el('overtime');
   const progress = el('progress');
   const buttons = {
     toggle: el<HTMLButtonElement>('toggle'),
@@ -26,9 +27,12 @@ export function createView(app: HTMLElement) {
   function render(s: Snapshot, today: Date) {
     app.dataset.phase = s.phase;
     setText(date, formatDate(today));
+    // At 00:00 the message takes the clock's place: the zero adds nothing.
+    const over = s.phase === 'timesup';
+    clock.hidden = over;
+    timesUp.hidden = !over;
     setText(clock, formatClock(s.remainingSeconds));
-    timesUp.hidden = s.phase !== 'timesup';
-    setText(timesUp, `TIME'S UP! +${formatClock(s.overtimeSeconds)}`);
+    setText(overtime, `+${formatClock(s.overtimeSeconds)}`);
     setText(buttons.toggle, TOGGLE_LABELS[s.status]);
     buttons.minus.disabled = !s.canSubtract;
     buttons.plus.disabled = !s.canAdd;

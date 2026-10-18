@@ -6,6 +6,11 @@ import { defineConfig, type Plugin } from 'vite';
 export default defineConfig({
   // Relative paths: the build works under github.io/dailywhip/ or anywhere else.
   base: './',
+  build: {
+    // The font goes inside the CSS: the floating window copies the styles and
+    // gets it without a request, offline included.
+    assetsInlineLimit: (file) => (file.endsWith('.woff2') ? true : undefined),
+  },
   plugins: [serviceWorker()],
 });
 

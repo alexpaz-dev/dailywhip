@@ -50,7 +50,7 @@ try {
   await capture('1-start', null, '#clock', '15:00');
   await capture('2-normal', '07:00', '#clock', '08:00');
   await capture('3-warning', '05:00', '#clock', '03:00'); // 12:00 of 15:00
-  await capture('4-timesup', '05:35', '#timesup', "TIME'S UP! +02:35");
+  await capture('4-timesup', '05:35', '#overtime', '+02:35'); // 17:35: TIME'S UP
 } finally {
   await browser.close();
   await server.close();

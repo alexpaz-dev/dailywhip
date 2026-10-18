@@ -1,3 +1,4 @@
+import '@fontsource/press-start-2p/latin-400.css';
 import './styles.css';
 import { openPip, pipSupported } from './pip';
 import * as timer from './timer';

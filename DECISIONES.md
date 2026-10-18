@@ -94,6 +94,17 @@ Decisiones tomadas durante el desarrollo de **Daily Whip**, en orden cronológic
 | D43 | Se instala **Playwright con Chromium**, solo para desarrollo, para poder ver la interfaz desde el Mac. | Usuario |
 | D44 | `pnpm screenshots` abre la **ventana flotante real** en Chromium y la captura en cada fase, con reloj simulado. Antes de cada captura espera el texto esperado y falla si hay errores en la página, así que también comprueba el recorrido completo. Las capturas no se suben al repo. | Técnica |
 
+## 9. F4 · Estética Minimal Pixel · 2026-10-18
+
+| #   | Decisión | Origen |
+| :-- | :------- | :----- |
+| D45 | La fuente Press Start 2P (D19) llega con `@fontsource/press-start-2p` y va **incrustada en el CSS**: la ventana flotante la recibe con los estilos copiados, sin pedirla a la red, también sin conexión. | Técnica |
+| D46 | Todos los tamaños son **múltiplos de 8**, la cuadrícula de la fuente: contador 48 px, "TIME'S UP!" 24 px, tiempo extra 16 px y el resto 8 px. Comprobado también con el escalado de Windows al 125 %. | Técnica |
+| D47 | **El rojo solo significa "date prisa"**: en NORMAL todo es blanco sobre negro. | Técnica |
+| D48 | En TIME'S UP, **"TIME'S UP!" y el tiempo extra ocupan el sitio del contador**, porque el 00:00 no aporta nada. La ventana no cambia de tamaño. | Técnica |
+| D49 | Lo **apagado** (botones desactivados y bloques vacíos) usa una versión oscura del fondo: gris sobre negro y rojo oscuro `#990000` sobre rojo. | Técnica |
+| D50 | Botones de **borde recto de 2 px**: al pasar el ratón invierten los colores y al pulsarlos bajan 2 px. | Técnica |
+
 ---
 
 ## Pendientes

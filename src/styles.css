@@ -1,11 +1,15 @@
-/* Functional styles. The Minimal Pixel look comes in F4. */
+/* Minimal Pixel. Press Start 2P is drawn on an 8 px grid: every font size is a
+   multiple of 8, so each font pixel lands on whole screen pixels. Red only
+   ever means "hurry". */
 
 :root {
   --black: #000000;
   --white: #ffffff;
   --red: #ff0000;
+  --dark-red: #990000;
   --gray: #808080;
   --dim: #333333;
+  --off: #666666;
   color-scheme: dark;
 }
 
@@ -22,27 +26,41 @@ body {
   margin: 0;
   background: var(--black);
   color: var(--white);
-  font-family: ui-monospace, Consolas, 'Courier New', monospace;
+  font: 8px/1 'Press Start 2P', monospace;
+  -webkit-font-smoothing: none;
 }
 
 p,
-h1,
-h2 {
+h1 {
   margin: 0;
 }
 
 button {
   font: inherit;
-  color: var(--white);
-  background: var(--black);
-  border: 2px solid var(--white);
+  color: var(--fg, var(--white));
+  background: var(--bg, var(--black));
+  border: 2px solid currentColor;
   border-radius: 0;
-  padding: 4px 10px;
+  padding: 8px 12px;
   cursor: pointer;
 }
 
+button:hover:not(:disabled) {
+  color: var(--bg, var(--black));
+  background: var(--fg, var(--white));
+}
+
+button:active:not(:disabled) {
+  transform: translateY(2px);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--fg, var(--white));
+  outline-offset: 2px;
+}
+
 button:disabled {
-  opacity: 0.35;
+  color: var(--off);
   cursor: default;
 }
 
@@ -52,88 +70,112 @@ button:disabled {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
   padding: 24px 16px;
+}
+
+.main .app {
+  border: 2px solid var(--white);
 }
 
 .note {
   width: 300px;
   display: grid;
-  gap: 8px;
+  gap: 16px;
   justify-items: start;
-  font-size: 12px;
+  line-height: 2;
 }
 
 .slogan {
-  font-size: 12px;
   color: var(--gray);
 }
 
 /* The timer: the same element in the main window and in the floating one */
 
 .app {
+  --bg: var(--black);
+  --fg: var(--white);
+  --empty: var(--dim);
   width: 300px;
   height: 250px;
-  padding: 10px 12px;
+  padding: 16px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background: var(--black);
-  border: 2px solid var(--white);
+  color: var(--fg);
+  background: var(--bg);
+}
+
+.app[data-phase='warning'],
+.app[data-phase='timesup'] {
+  --bg: var(--red);
+  --empty: var(--dark-red);
+  --off: var(--dark-red);
 }
 
 .pip .app {
   width: 100vw;
   height: 100vh;
-  border: 0;
-}
-
-.app[data-phase='warning'],
-.app[data-phase='timesup'] {
-  background: var(--red);
 }
 
 .top {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  font-size: 12px;
 }
 
 .title {
   font-size: inherit;
 }
 
+.display {
+  height: 48px;
+  display: grid;
+  place-items: center;
+}
+
 .clock {
-  font-size: 64px;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
+  font-size: 48px;
 }
 
 .timesup {
-  font-size: 14px;
-  font-weight: bold;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.timesup-title {
+  font-size: 24px;
+}
+
+.overtime {
+  font-size: 16px;
 }
 
 .progress {
-  width: 100%;
-  height: 12px;
   display: grid;
-  grid-template-columns: repeat(20, 1fr);
+  grid-template-columns: repeat(20, 11px);
   gap: 2px;
+  padding: 2px;
+  border: 2px solid var(--fg);
 }
 
 .progress span {
-  background: var(--dim);
+  height: 8px;
+  background: var(--empty);
 }
 
 .progress span.on {
-  background: var(--white);
+  background: var(--fg);
 }
 
 .controls {
   display: flex;
   gap: 8px;
+}
+
+#toggle,
+#reset {
+  width: 80px;
 }
