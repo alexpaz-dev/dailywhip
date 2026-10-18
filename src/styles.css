@@ -1,4 +1,4 @@
-/* Prototype styles: functional only. The Minimal Pixel look comes in F4. */
+/* Functional styles. The Minimal Pixel look comes in F4. */
 
 :root {
   --black: #000000;
@@ -56,27 +56,17 @@ button:disabled {
   padding: 24px 16px;
 }
 
-.floating,
-.lab {
+.note {
   width: 300px;
   display: grid;
   gap: 8px;
   justify-items: start;
+  font-size: 12px;
 }
 
-.lab {
+.slogan {
   font-size: 12px;
   color: var(--gray);
-}
-
-.lab h2 {
-  font-size: inherit;
-  text-transform: uppercase;
-}
-
-.lab ul {
-  margin: 0;
-  padding-left: 16px;
 }
 
 /* The timer: the same element in the main window and in the floating one */
@@ -146,13 +136,4 @@ button:disabled {
 .controls {
   display: flex;
   gap: 8px;
-}
-
-.refresh {
-  font-size: 10px;
-  color: var(--gray);
-}
-
-.app:not([data-phase='normal']) .refresh {
-  color: var(--white);
 }

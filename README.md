@@ -11,6 +11,7 @@ Un temporizador minimalista con estética pixel art para que las dailies termine
 1. Abre https://alexpaz-dev.github.io/dailywhip/ en **Chrome o Edge** de escritorio.
 2. Opcional: instálala como app con el icono de instalar de la barra de direcciones.
 3. Pulsa **START**: el temporizador pasa a una ventana flotante siempre visible.
+4. Deja abierta la ventana principal mientras flota (puedes minimizarla): si la cierras, se cierra el temporizador.
 
 ## Desarrollo
 

@@ -11,39 +11,46 @@
   </head>
   <body>
     <main class="main">
-      <div id="host">
+      <div id="dock">
         <!-- The timer. This element moves into the floating window and back. -->
-        <section id="app" class="app" data-phase="normal">
+        <section id="app" class="app" data-phase="normal" aria-label="Daily Whip timer">
           <header class="top">
             <h1 class="title">DAILY WHIP</h1>
             <p id="date"></p>
           </header>
-          <p id="clock" class="clock">15:00</p>
+          <p id="clock" class="clock" role="timer">15:00</p>
           <p id="timesup" class="timesup" hidden></p>
-          <div id="progress" class="progress" aria-hidden="true"></div>
+          <div
+            id="progress"
+            class="progress"
+            role="progressbar"
+            aria-label="Time used"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          ></div>
           <div class="controls">
-            <button id="minus" type="button">-5</button>
+            <button id="minus" type="button" aria-label="Subtract 5 minutes">-5</button>
             <button id="toggle" type="button">START</button>
-            <button id="plus" type="button">+5</button>
+            <button id="plus" type="button" aria-label="Add 5 minutes">+5</button>
           </div>
           <button id="reset" type="button">RESET</button>
-          <p id="refresh" class="refresh"></p>
         </section>
       </div>
 
-      <div id="floating" class="floating" hidden>
-        <p>The timer is in the floating window.</p>
-        <button id="dock" type="button">BRING BACK</button>
+      <div id="docked" class="note" hidden>
+        <button id="float" type="button">FLOAT</button>
+        <p>Keeps the timer on top of Meet, Teams or Zoom. START does it too.</p>
       </div>
-      <button id="float" type="button" hidden>FLOAT</button>
+      <div id="floating" class="note" hidden>
+        <p>The timer is on top. Keep this window open: you can minimize it.</p>
+        <button id="bring-back" type="button">BRING BACK</button>
+      </div>
+      <p id="unsupported" class="note" hidden>
+        This browser can't keep the timer on top. Use Chrome or Edge on desktop.
+      </p>
 
-      <!-- PROTOTYPE ONLY -->
-      <section class="lab">
-        <h2>Prototipo · diagnóstico</h2>
-        <p id="support"></p>
-        <p id="mode"></p>
-        <ul id="log"></ul>
-      </section>
+      <p class="slogan">15 minutes. No excuses.</p>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>

@@ -79,6 +79,14 @@ Decisiones tomadas durante el desarrollo de **Daily Whip**, en orden cronológic
 | D38 | **Distribución:** la URL de GitHub Pages, instalable desde Chrome o Edge. Sustituye al instalador en GitHub Releases (§12 del brief). | Propuesta aprobada |
 | D39 | **Plan de desarrollo PWA:** F3 interfaz funcional definitiva · F4 estética Minimal Pixel · F5 alertas (parpadeo, interruptor, TIME'S UP) · F6 látigo · F7 versión 1.0 (icono, README y revisión final en Windows). | Propuesta aprobada |
 
+## 7. F3 · Interfaz funcional · 2026-10-18
+
+| #   | Decisión | Origen |
+| :-- | :------- | :----- |
+| D40 | La **ventana principal** muestra el temporizador cuando no flota, con un botón **FLOAT**. Mientras flota, avisa de que debe seguir abierta (se puede minimizar) y ofrece **BRING BACK**. | Técnica |
+| D41 | **Sin ventana flotante** (Firefox, Safari), el temporizador funciona igual dentro de la página y se avisa de usar Chrome o Edge. | Técnica |
+| D42 | Se retira el **panel de diagnóstico** del prototipo. El pintado de la interfaz pasa a `view.ts`. | Técnica |
+
 ---
 
 ## Pendientes
