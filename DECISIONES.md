@@ -113,9 +113,10 @@ Decisiones tomadas durante el desarrollo de **Daily Whip**, en orden cronológic
 | D52 | El interruptor es un **rayo pixelado** en la cabecera: blanco si está encendido y oscuro si está apagado. Lleva `aria-pressed` y un texto de ayuda ("Blinking on" / "Blinking off"). | Técnica |
 | D53 | La preferencia se **guarda en el navegador**. Si nunca se ha tocado, sigue a Windows: empieza apagado cuando los efectos de animación están desactivados. Una elección explícita manda siempre. | Técnica |
 | D54 | Lo apagado sobre rojo pasa de `#990000` a **`#660000`**, para que se siga viendo en las dos fases del parpadeo (actualiza D49). Los botones pasan a ser transparentes y parpadean con la ventana. | Técnica |
+| D55 | El **rojo de alerta pasa a `#EE0000`** (actualiza D03). Con texto blanco da un contraste de 4,5:1, el mínimo para el texto de 8 px. El brief permite tonos intermedios de rojo cuando mejoran la legibilidad. | Usuario |
 
 ---
 
 ## Pendientes
 
-- **Rojo de alerta:** `#FF0000`, como pide el brief, o `#EE0000`, que da un contraste de 4,5:1 con el texto blanco de 8 px. El brief permite tonos intermedios de rojo cuando mejoran la legibilidad. De momento sigue `#FF0000`.
+Ninguno por ahora.
