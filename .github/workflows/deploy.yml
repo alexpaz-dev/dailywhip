@@ -1,5 +1,9 @@
 name: Deploy
 
+# Publishes main at /dailywhip/ and the frozen prototype branch at
+# /dailywhip/prototype/. Pages allows a single deployment per repo, so both
+# builds go into one artifact.
+
 on:
   push:
     branches: [main]
@@ -27,6 +31,17 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
       - run: pnpm build
+
+      # After the app's tests, so Vitest does not pick up the prototype's.
+      - uses: actions/checkout@v5
+        with:
+          ref: prototype
+          path: .prototype
+      - name: Build the prototype
+        working-directory: .prototype
+        run: pnpm install --frozen-lockfile && pnpm build
+      - run: cp -R .prototype/dist dist/prototype
+
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist

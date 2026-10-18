@@ -44,7 +44,7 @@ Decisiones tomadas durante el desarrollo de **Daily Whip**, en orden cronológic
 | #   | Decisión | Origen |
 | :-- | :------- | :----- |
 | D20 | Se **descarta la extensión de Chrome**: no puede crear ventanas siempre encima, y distribuirla es más difícil. | Propuesta aprobada |
-| D21 | Se empieza por un **prototipo PWA con ventana flotante** (Document Picture-in-Picture) para validarlo en Windows. Si no supera las pruebas de [PROTOTIPO.md](PROTOTIPO.md), el mismo código se lleva a **Tauri 2**. | Usuario |
+| D21 | Se empieza por un **prototipo PWA con ventana flotante** (Document Picture-in-Picture) para validarlo en Windows. Si no supera las pruebas de [PROTOTIPO.md](https://github.com/alexpaz-dev/dailywhip/blob/prototype/PROTOTIPO.md), el mismo código se lleva a **Tauri 2**. | Usuario |
 | D22 | Base: **Vite + TypeScript sin framework**, y **Vitest** para los tests. | Propuesta aprobada |
 | D23 | Gestor de paquetes **pnpm**, como en contrast. | Técnica |
 | D24 | Publicación en **GitHub Pages**: cada push a `main` pasa los tests y despliega. | Propuesta aprobada |
@@ -67,9 +67,20 @@ Decisiones tomadas durante el desarrollo de **Daily Whip**, en orden cronológic
 | D31 | Licencia **MIT**. | Usuario |
 | D32 | El brief se guarda en `BRIEF.md`, **solo en local**: está en `.gitignore` y no se publica. | Usuario |
 
+## 6. Validación del prototipo · 2026-10-18
+
+| #   | Decisión | Origen |
+| :-- | :------- | :----- |
+| D33 | El prototipo **supera las 4 pruebas** en Windows con Chrome, durante una daily real con Google Meet. | Usuario |
+| D34 | **Daily Whip será una PWA.** Se descarta Tauri. | Usuario |
+| D35 | El prototipo se conserva en la rama **`prototype`** y se publica en **`/dailywhip/prototype/`**. | Usuario |
+| D36 | La rama `prototype` no tiene workflow propio: el de `main` la compila y la publica en la subcarpeta, porque Pages solo admite un despliegue por repo. Las dos apps comparten origen y cada una usa su propia caché. | Técnica |
+| D37 | Al ser PWA, la ventana flotante lleva la barra de Chrome y **no se puede minimizar**, solo cerrar y reabrir. Se acepta con la prueba 4. | Usuario |
+| D38 | **Distribución:** la URL de GitHub Pages, instalable desde Chrome o Edge. Sustituye al instalador en GitHub Releases (§12 del brief). | Propuesta aprobada |
+| D39 | **Plan de desarrollo PWA:** F3 interfaz funcional definitiva · F4 estética Minimal Pixel · F5 alertas (parpadeo, interruptor, TIME'S UP) · F6 látigo · F7 versión 1.0 (icono, README y revisión final en Windows). | Propuesta aprobada |
+
 ---
 
 ## Pendientes
 
-- Resultado de las pruebas del prototipo en Windows ([PROTOTIPO.md](PROTOTIPO.md)). Decide entre PWA y Tauri.
-- Si se queda en PWA: cómo encajar "permitir minimizar" (§4 del brief) y "distribución mediante GitHub Releases" (§12).
+Ninguno por ahora.

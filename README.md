@@ -4,7 +4,7 @@
 
 Un temporizador minimalista con estética pixel art para que las dailies terminen a tiempo. Se mantiene por encima de Meet, Teams o Zoom, funciona sin conexión y no recoge datos.
 
-**Estado:** prototipo. Se está validando si puede funcionar como PWA ([PROTOTIPO.md](PROTOTIPO.md)).
+**Estado:** en desarrollo como PWA. El prototipo con el que se validó está en la rama [`prototype`](https://github.com/alexpaz-dev/dailywhip/tree/prototype) y publicado en https://alexpaz-dev.github.io/dailywhip/prototype/.
 
 ## Uso
 
@@ -24,7 +24,7 @@ pnpm build     # build de producción en dist/
 pnpm preview   # sirve la build, con service worker
 ```
 
-La ventana flotante solo funciona en Chrome y Edge; Safari y Firefox no la soportan. Cada push a `main` pasa los tests y se publica en GitHub Pages.
+La ventana flotante solo funciona en Chrome y Edge; Safari y Firefox no la soportan. Cada push a `main` pasa los tests y se publica en GitHub Pages, junto con el prototipo en `/prototype/`.
 
 Las decisiones del proyecto están en [DECISIONES.md](DECISIONES.md).
 
