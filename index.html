@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="15 minutes. No excuses." />
+    <meta name="theme-color" content="#000000" />
+    <title>Daily Whip</title>
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="/icons/icon-192.png" />
+  </head>
+  <body>
+    <main class="main">
+      <div id="host">
+        <!-- The timer. This element moves into the floating window and back. -->
+        <section id="app" class="app" data-phase="normal">
+          <header class="top">
+            <h1 class="title">DAILY WHIP</h1>
+            <p id="date"></p>
+          </header>
+          <p id="clock" class="clock">15:00</p>
+          <p id="timesup" class="timesup" hidden></p>
+          <div id="progress" class="progress" aria-hidden="true"></div>
+          <div class="controls">
+            <button id="minus" type="button">-5</button>
+            <button id="toggle" type="button">START</button>
+            <button id="plus" type="button">+5</button>
+          </div>
+          <button id="reset" type="button">RESET</button>
+          <p id="refresh" class="refresh"></p>
+        </section>
+      </div>
+
+      <div id="floating" class="floating" hidden>
+        <p>The timer is in the floating window.</p>
+        <button id="dock" type="button">BRING BACK</button>
+      </div>
+      <button id="float" type="button" hidden>FLOAT</button>
+
+      <!-- PROTOTYPE ONLY -->
+      <section class="lab">
+        <h2>Prototipo · diagnóstico</h2>
+        <p id="support"></p>
+        <p id="mode"></p>
+        <ul id="log"></ul>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
