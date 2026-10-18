@@ -23,6 +23,7 @@ pnpm dev       # servidor de desarrollo
 pnpm test      # tests
 pnpm build     # build de producción en dist/
 pnpm preview   # sirve la build, con service worker
+pnpm screenshots  # capturas de cada fase en screenshots/ (Playwright)
 ```
 
 La ventana flotante solo funciona en Chrome y Edge; Safari y Firefox no la soportan. Cada push a `main` pasa los tests y se publica en GitHub Pages, junto con el prototipo en `/prototype/`.

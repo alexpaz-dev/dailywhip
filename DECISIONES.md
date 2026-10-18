@@ -87,6 +87,13 @@ Decisiones tomadas durante el desarrollo de **Daily Whip**, en orden cronológic
 | D41 | **Sin ventana flotante** (Firefox, Safari), el temporizador funciona igual dentro de la página y se avisa de usar Chrome o Edge. | Técnica |
 | D42 | Se retira el **panel de diagnóstico** del prototipo. El pintado de la interfaz pasa a `view.ts`. | Técnica |
 
+## 8. Herramientas · 2026-10-18
+
+| #   | Decisión | Origen |
+| :-- | :------- | :----- |
+| D43 | Se instala **Playwright con Chromium**, solo para desarrollo, para poder ver la interfaz desde el Mac. | Usuario |
+| D44 | `pnpm screenshots` abre la **ventana flotante real** en Chromium y la captura en cada fase, con reloj simulado. Antes de cada captura espera el texto esperado y falla si hay errores en la página, así que también comprueba el recorrido completo. Las capturas no se suben al repo. | Técnica |
+
 ---
 
 ## Pendientes
