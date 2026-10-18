@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Daily Whip",
-  "short_name": "Daily Whip",
+  "name": "Daily Whip · prototype",
+  "short_name": "DW prototype",
   "description": "15 minutes. No excuses.",
   "start_url": "./",
   "scope": "./",

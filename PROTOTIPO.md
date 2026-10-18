@@ -2,7 +2,9 @@
 
 Este prototipo sirve para decidir si Daily Whip puede ser una PWA o necesita Tauri (D21 en [DECISIONES.md](DECISIONES.md)). Es funcional pero aún no tiene estética: sin fuente pixel, sin parpadeo y sin látigo.
 
-**URL:** https://alexpaz-dev.github.io/dailywhip/ (disponible tras el primer despliegue)
+**URL:** https://alexpaz-dev.github.io/dailywhip/prototype/
+
+> **Rama congelada.** El prototipo superó las pruebas y Daily Whip se desarrolla como PWA en `main`. Esta rama no tiene workflow propio: el de `main` la compila y la publica en `/prototype/`.
 
 ## Preparación
 
@@ -26,9 +28,13 @@ Comprueba también que, al cerrar la ventana flotante con su X, el temporizador 
 
 ## Resultado
 
+Probado el 2026-10-18 en Windows con Chrome, durante una daily real con Google Meet.
+
 | # | ¿Se supera? | Notas |
 | :-- | :-- | :-- |
-| 1 | | |
-| 2 | | |
-| 3 | | |
-| 4 | | |
+| 1 | Sí | |
+| 2 | Sí | |
+| 3 | Sí | |
+| 4 | Sí | |
+
+**Conclusión:** Daily Whip será una PWA (D34 en `DECISIONES.md` de `main`).
