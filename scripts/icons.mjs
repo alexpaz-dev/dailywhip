@@ -1,27 +1,45 @@
-// Generates the PWA icons from a pixel matrix, with no image tools.
-// Placeholder until the final icon (F7).
+// Generates the app icons from pixel art, with no image tools: the whip
+// cracking on the alert red. 32×32 art pixels, so every size is an exact
+// multiple: 32 (browser tab), 192 and 512 (installed app).
+// W white, G grey, K black outline, . red background.
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { crc32, deflateSync } from 'node:zlib';
 
 const ART = [
-  '................',
-  '................',
-  '................',
-  '.RR..........RR.',
-  '.RR..........RR.',
-  '.RR..........RR.',
-  '.RR....RR....RR.',
-  '.RR....RR....RR.',
-  '.RR...RRRR...RR.',
-  '.RR..RR..RR..RR.',
-  '.RR.RR....RR.RR.',
-  '.RRRR......RRRR.',
-  '.RRR........RRR.',
-  '................',
-  '................',
-  '................',
+  '................................',
+  '................................',
+  '..........................W.....',
+  '.......................W..W..W..',
+  '........................W.W.W...',
+  '.........................KKK....',
+  '......................WWWKWKWWW.',
+  '........................KKWK....',
+  '.......................KKWKKW...',
+  '......................KKWKK..W..',
+  '...................KKKKWKKW.....',
+  '...............KKKKKWWWKK.......',
+  '..............KKWWWWKKKK........',
+  '.............KKWKKKKK...........',
+  '............KKWKK...............',
+  '............KWWK................',
+  '...........KKWKK................',
+  '...........KWWK.................',
+  '...........KWKK.................',
+  '..........KKWK..................',
+  '.........KKWWK..................',
+  '........KKGWWK..................',
+  '.......KKWGGKK..................',
+  '......KKWWWKK...................',
+  '...KKKKGWWKK....................',
+  '...KWWWWGKK.....................',
+  '...KWWWWKK......................',
+  '...KWWWWK.......................',
+  '...KWWWWK.......................',
+  '...KKKKKK.......................',
+  '................................',
+  '................................',
 ];
-const COLORS = { '.': [0, 0, 0], R: [255, 0, 0] };
+const COLORS = { '.': [238, 0, 0], W: [255, 255, 255], G: [128, 128, 128], K: [0, 0, 0] };
 const SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
 function chunk(type, data) {
@@ -57,4 +75,4 @@ function png(size) {
 }
 
 mkdirSync('public/icons', { recursive: true });
-for (const size of [192, 512]) writeFileSync(`public/icons/icon-${size}.png`, png(size));
+for (const size of [32, 192, 512]) writeFileSync(`public/icons/icon-${size}.png`, png(size));

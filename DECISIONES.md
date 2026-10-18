@@ -126,6 +126,14 @@ Decisiones tomadas durante el desarrollo de **Daily Whip**, en orden cronológic
 | D60 | Con los **efectos de animación de Windows desactivados**, el látigo aparece pero quieto; en TIME'S UP, en el fotograma del chasquido. El interruptor del rayo solo controla el parpadeo. | Técnica |
 | D61 | Un test obliga a que el arte deje libres las 4 filas superiores y la última columna. Así el látigo no alcanza los botones ni cuando tiembla. | Técnica |
 
+## 12. F7 · Versión 1.0 · 2026-10-18
+
+| #   | Decisión | Origen |
+| :-- | :------- | :----- |
+| D62 | **Icono definitivo:** el látigo dando el chasquido sobre el rojo `#EE0000`, a 32×32 en arte ASCII (`scripts/icons.mjs`). Escala exacto a 32 (pestaña del navegador), 192 y 512 (app instalada). | Técnica |
+| D63 | El service worker **ignora `Vary`** al buscar en su caché. Con un servidor que responda `Vary: Origin`, la app se quedaba sin JavaScript ni estilos sin conexión. En GitHub Pages no fallaba (comprobado), pero así no depende del servidor. | Técnica |
+| D64 | **README final** de instalación y uso, con una captura, y **REVISION.md** con los criterios de aceptación del brief para la revisión en Windows. La etiqueta `v1.0.0` se pone cuando esa revisión salga bien. | Técnica |
+
 ---
 
 ## Pendientes

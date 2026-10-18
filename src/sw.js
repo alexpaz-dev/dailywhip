@@ -26,12 +26,16 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// ignoreVary: the script and stylesheet load with `crossorigin`, so their
+// requests carry an Origin header the precache requests lack. A server that
+// answers with `Vary: Origin` would make them miss the cache offline. The
+// cache only holds this app's own static files, so Vary can be ignored.
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   event.respondWith(
     caches
       .open(CACHE)
-      .then((cache) => cache.match(event.request))
+      .then((cache) => cache.match(event.request, { ignoreVary: true }))
       .then((cached) => cached ?? fetch(event.request)),
   );
 });
