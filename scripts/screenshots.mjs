@@ -18,13 +18,16 @@ const browser = await chromium.launch();
 const errors = [];
 
 // Polls from Node: the page's own timers are fake.
-async function waitForText(page, selector, text) {
+async function waitFor(check, label) {
   for (let i = 0; i < 100; i++) {
-    if ((await page.locator(selector).textContent()) === text) return;
+    if (await check()) return;
     await sleep(50);
   }
-  throw new Error(`${selector} never showed "${text}"`);
+  throw new Error(`Timed out waiting for ${label}`);
 }
+
+const waitForText = (page, selector, text) =>
+  waitFor(async () => (await page.locator(selector).textContent()) === text, `${selector} = "${text}"`);
 
 try {
   const context = await browser.newContext({ viewport: { width: 400, height: 520 }, deviceScaleFactor: SCALE });
@@ -42,15 +45,45 @@ try {
   await pip.setViewportSize({ width: 300, height: 250 }); // the size openPip() requests
   await main.screenshot({ path: `${OUT}/main-floating.png` });
 
-  const capture = async (name, forward, selector, text) => {
-    if (forward) await context.clock.fastForward(forward);
-    await waitForText(pip, selector, text);
-    await pip.screenshot({ path: `${OUT}/pip-${name}.png` });
-  };
-  await capture('1-start', null, '#clock', '15:00');
-  await capture('2-normal', '07:00', '#clock', '08:00');
-  await capture('3-warning', '05:00', '#clock', '03:00'); // 12:00 of 15:00
-  await capture('4-timesup', '05:35', '#overtime', '+02:35'); // 17:35: TIME'S UP
+  const shot = (name) => pip.screenshot({ path: `${OUT}/pip-${name}.png` });
+  // CSS animations ignore the fake clock: pause the blink at a chosen moment.
+  const blinkAt = (ms) =>
+    pip.evaluate((t) => document.getAnimations().forEach((a) => ((a.currentTime = t), a.pause())), ms);
+  const blinkIs = (value) =>
+    waitFor(async () => (await pip.locator('#app').getAttribute('data-blink')) === value, `blink ${value}`);
+
+  await waitForText(pip, '#clock', '15:00');
+  await shot('1-start');
+  await context.clock.fastForward('07:00');
+  await waitForText(pip, '#clock', '08:00');
+  await shot('2-normal');
+  await context.clock.fastForward('05:00'); // 12:00 of 15:00: WARNING
+  await waitForText(pip, '#clock', '03:00');
+  await blinkAt(250);
+  await shot('3a-warning');
+  await blinkAt(750);
+  await shot('3b-warning-dark');
+  // Clicks leave the mouse hovering the bolt; move it away to see its state.
+  await pip.click('#blink');
+  await blinkIs('off');
+  await pip.mouse.move(0, 0);
+  await shot('3c-warning-no-blink');
+  await pip.click('#blink');
+  await blinkIs('on');
+  await pip.mouse.move(0, 0);
+  await context.clock.fastForward('05:35'); // 17:35: TIME'S UP
+  await waitForText(pip, '#overtime', '+02:35');
+  await blinkAt(750);
+  await shot('4-timesup-dark');
+
+  // Windows "Animation effects" off: no blinking until the user turns it on.
+  const reduced = await browser.newContext({ reducedMotion: 'reduce' });
+  const page = await reduced.newPage();
+  await page.goto(server.resolvedUrls.local[0]);
+  if ((await page.locator('#app').getAttribute('data-blink')) !== 'off') {
+    errors.push('Blinking should start off when the system reduces motion');
+  }
+  await reduced.close();
 } finally {
   await browser.close();
   await server.close();

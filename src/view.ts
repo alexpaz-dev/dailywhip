@@ -21,6 +21,7 @@ export function createView(app: HTMLElement) {
     minus: el<HTMLButtonElement>('minus'),
     plus: el<HTMLButtonElement>('plus'),
     reset: el<HTMLButtonElement>('reset'),
+    blink: el<HTMLButtonElement>('blink'),
   };
   const blocks = Array.from({ length: BLOCKS }, () => progress.appendChild(document.createElement('span')));
 
@@ -42,7 +43,13 @@ export function createView(app: HTMLElement) {
     progress.setAttribute('aria-valuenow', String(Math.round(s.progress * 100)));
   }
 
-  return { buttons, render };
+  function renderBlink(on: boolean) {
+    app.dataset.blink = on ? 'on' : 'off';
+    buttons.blink.setAttribute('aria-pressed', String(on));
+    buttons.blink.title = on ? 'Blinking on' : 'Blinking off';
+  }
+
+  return { buttons, render, renderBlink };
 }
 
 function setText(el: HTMLElement, text: string) {

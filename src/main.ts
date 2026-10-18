@@ -1,5 +1,6 @@
 import '@fontsource/press-start-2p/latin-400.css';
 import './styles.css';
+import { loadBlink, saveBlink } from './blink';
 import { openPip, pipSupported } from './pip';
 import * as timer from './timer';
 import { createView } from './view';
@@ -62,7 +63,15 @@ function onPipClosed() {
   render();
 }
 
+let blink = loadBlink();
+view.renderBlink(blink);
+
 const { toggle, minus, plus, reset } = view.buttons;
+view.buttons.blink.addEventListener('click', () => {
+  blink = !blink;
+  saveBlink(blink);
+  view.renderBlink(blink);
+});
 toggle.addEventListener('click', () => {
   const current = timer.status(state);
   if (current === 'running') {

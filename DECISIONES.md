@@ -105,8 +105,17 @@ Decisiones tomadas durante el desarrollo de **Daily Whip**, en orden cronológic
 | D49 | Lo **apagado** (botones desactivados y bloques vacíos) usa una versión oscura del fondo: gris sobre negro y rojo oscuro `#990000` sobre rojo. | Técnica |
 | D50 | Botones de **borde recto de 2 px**: al pasar el ratón invierten los colores y al pulsarlos bajan 2 px. | Técnica |
 
+## 10. F5 · Alertas · 2026-10-18
+
+| #   | Decisión | Origen |
+| :-- | :------- | :----- |
+| D51 | WARNING y TIME'S UP **parpadean a 1 Hz** entre el rojo y un rojo más oscuro (`#B30000`). Se percibe, no es rápido y queda muy por debajo del límite de accesibilidad de 3 destellos por segundo. El texto blanco se lee en los dos tonos. | Técnica |
+| D52 | El interruptor es un **rayo pixelado** en la cabecera: blanco si está encendido y oscuro si está apagado. Lleva `aria-pressed` y un texto de ayuda ("Blinking on" / "Blinking off"). | Técnica |
+| D53 | La preferencia se **guarda en el navegador**. Si nunca se ha tocado, sigue a Windows: empieza apagado cuando los efectos de animación están desactivados. Una elección explícita manda siempre. | Técnica |
+| D54 | Lo apagado sobre rojo pasa de `#990000` a **`#660000`**, para que se siga viendo en las dos fases del parpadeo (actualiza D49). Los botones pasan a ser transparentes y parpadean con la ventana. | Técnica |
+
 ---
 
 ## Pendientes
 
-Ninguno por ahora.
+- **Rojo de alerta:** `#FF0000`, como pide el brief, o `#EE0000`, que da un contraste de 4,5:1 con el texto blanco de 8 px. El brief permite tonos intermedios de rojo cuando mejoran la legibilidad. De momento sigue `#FF0000`.
